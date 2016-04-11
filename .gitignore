@@ -33,3 +33,4 @@
 
 # Binaries
 *.bin
+*.o

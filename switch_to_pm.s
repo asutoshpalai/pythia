@@ -1,6 +1,9 @@
 [bits 16]
 
 switch_to_pm:
+  mov bx, SWITCHING_PROT_MODE 
+  call print_string
+
   cli
 
   lgdt [gdt_descriptor]
@@ -27,4 +30,4 @@ init_pm:
 
   call START_PM
 
-%include "gdt.s"
+SWITCHING_PROT_MODE db 'Switching to 32 bit protected mode', 0
