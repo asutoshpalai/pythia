@@ -34,3 +34,4 @@
 # Binaries
 *.bin
 *.o
+os-image
