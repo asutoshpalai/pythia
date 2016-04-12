@@ -8,7 +8,7 @@ build/os-image: boot/boot_sector.bin kernel/kernel.bin
 	cat $^ > $@
 
 kernel/kernel.bin: kernel/kernel_entry.o kernel/kernel.o kernel/vga/vga.o
-	$(LD) -o $@ -shared --oformat binary -ffreestanding -O2 -nostdlib -m elf_i386 -Ttext 0x1000 $^ 
+	$(LD) -o $@ -shared --oformat binary -ffreestanding -O2 -nostdlib -m elf_i386 -Ttext 0x10000 $^
 
 %.o: %.c
 	$(CC) -m32 -ffreestanding -c $< -o $@

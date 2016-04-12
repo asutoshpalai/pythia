@@ -6,6 +6,8 @@ switch_to_pm:
 
   cli
 
+  call enable_a20
+
   lgdt [gdt_descriptor]
 
   mov eax, cr0
@@ -30,4 +32,4 @@ init_pm:
 
   call START_PM
 
-SWITCHING_PROT_MODE db 'Switching to 32 bit protected mode', 0
+SWITCHING_PROT_MODE db 'Switching to protected mode', 0

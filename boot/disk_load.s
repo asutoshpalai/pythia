@@ -22,4 +22,3 @@ call print_string
 jmp $
 ; Variables
 DISK_ERROR_MSG db "Disk read error !" , 0
-C_FLAG_NOT_SET db "C Flag not set ! === " , 0
