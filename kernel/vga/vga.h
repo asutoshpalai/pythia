@@ -38,6 +38,8 @@ void terminal_scroll();
 
 void terminal_putchar(char c);
 
+void terminal_move_csr();
+
 void terminal_writestring(const char *data); 
 
 #endif

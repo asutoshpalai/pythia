@@ -4,6 +4,7 @@
 #include <stddef.h>
 #include <stdint.h>
 #include "vga.h"
+#include "../system.h"
 
 uint8_t make_color(enum vga_color fg, enum vga_color bg) {
   return fg | bg << 4;
@@ -11,13 +12,6 @@ uint8_t make_color(enum vga_color fg, enum vga_color bg) {
 
 uint16_t make_vgaentry(char c, uint8_t color) {
   return (uint16_t)c | (uint16_t)color << 8;
-}
-
-size_t strlen(const char *str) {
-  size_t len = 0;
-  while (str[len] != 0)
-    len++;
-  return len;
 }
 
 size_t terminal_column;
@@ -72,6 +66,26 @@ void terminal_putchar(char c) {
       terminal_scroll();
     }
   }
+  terminal_move_csr();
+
+}
+
+/* Updates the hardware cursor: the little blinking line
+ * on the screen under the last character pressed! */
+void terminal_move_csr() {
+  size_t index = terminal_row * 80 + terminal_column;
+
+  /* This sends a command to indicies 14 and 15 in the
+   * CRT Control Register of the VGA controller. These
+   * are the high and low bytes of the index that show
+   * where the hardware cursor is to be 'blinking'. To
+   * learn more, you should look up some VGA specific
+   * programming documents. A great start to graphics:
+   * http://www.brackeen.com/home/vga */
+  outportb(0x3D4, 14);
+  outportb(0x3D5, index>> 8);
+  outportb(0x3D4, 15);
+  outportb(0x3D5, index);
 
 }
 
