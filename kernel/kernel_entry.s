@@ -21,3 +21,10 @@ gdt_flush:
   jmp 0x08:gdt_flush_fjmp
 gdt_flush_fjmp:
   ret
+
+global idt_load
+[extern idtp]
+
+idt_load:
+  lidt [idtp]
+  ret

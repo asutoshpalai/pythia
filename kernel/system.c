@@ -1,4 +1,5 @@
 #include "system.h"
+#include "string.h"
 
 unsigned char inportb (unsigned short port) {
   unsigned char rv;
@@ -51,4 +52,29 @@ void gdt_install() {
 
   /* Flush out the old GDT and install the new changes! */
   gdt_flush();
+}
+
+void idt_set_gate(struct idt_entry *idt, uint32_t base, uint16_t sel, uint8_t flags)
+{
+  idt->offset_lo = base & 0xFFFFFFFF;
+  idt->offset_hi = (base >> 16) & 0xFFFFFFFF;
+  idt->selector = sel;
+  idt->zero = 0;
+  idt->type_attr = flags;
+}
+
+/* Installs the IDT */
+void idt_install()
+{
+  /* Sets the special IDT pointer up, just like in 'gdt.c' */
+  idtp.limit = (sizeof (struct idt_entry) * 256) - 1;
+  idtp.base = (uint32_t) &idt;
+
+  /* Clear out the entire IDT, initializing it to zeros */
+  memset(&idt, 0, sizeof(struct idt_entry) * 256);
+
+  /* Add any new ISRs to the IDT here using idt_set_gate */
+
+  /* Points the processor's internal register to the new IDT */
+  idt_load();
 }

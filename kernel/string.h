@@ -2,6 +2,7 @@
 #define _STRING_H
 
 #include <stddef.h>
+#include <stdint.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -11,6 +12,8 @@ extern "C" {
   void* memset(void*, int, size_t);
   void* memsetw(void* bufptr, int value, size_t size);
   size_t strlen(const char*);
+
+  void puts(const char *data);
 
 #ifdef __cplusplus
 

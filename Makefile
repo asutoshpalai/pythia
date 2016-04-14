@@ -1,8 +1,12 @@
 LD=i686-elf-ld
 CC=i686-elf-gcc
 
+CFLAGS=-Wall -Wextra -O2 -m32 -ffreestanding
+
 KERNEL_OBJ_LIST:=\
 kernel/kernel_entry.o \
+kernel/isr.o \
+kernel/isrc.o \
 kernel/kernel.o \
 kernel/system.o \
 kernel/string.o \
@@ -24,7 +28,7 @@ kernel/kernel.bin: $(KERNEL_OBJ_LIST)
 	$(LD) -o $@ -shared --oformat binary -ffreestanding -O2 -nostdlib -m elf_i386 -Ttext 0x10000 $^
 
 %.o: %.c
-	$(CC) -m32 -ffreestanding -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 %.o: %.s
 	nasm $< -I"$(shell dirname $<)/" -f elf -o $@

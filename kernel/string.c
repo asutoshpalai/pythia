@@ -1,4 +1,5 @@
 #include "string.h"
+#include "vga/vga.h"
 
 void* memcpy(void* restrict dstptr, const void* restrict srcptr, size_t size) {
   unsigned char* dst = (unsigned char*) dstptr;
@@ -37,4 +38,8 @@ size_t strlen(const char* data) {
   while (data[result])
     result++;
   return result;
+}
+
+void puts(const char *data) {
+  terminal_writestring(data);
 }
