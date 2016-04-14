@@ -4,6 +4,7 @@
 #include <stddef.h>
 #include <stdint.h>
 #include "vga/vga.h"
+#include "system.h"
 
 #if defined(__linux__)
 #error "You are not using cross-compiler, please switch"
@@ -17,6 +18,7 @@
 extern "C"
 #endif
 void kernel_main() {
+  gdt_install();
   terminal_initialize();
 
   terminal_writestring("Hello, kernel World!\n");

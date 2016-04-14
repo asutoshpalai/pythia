@@ -45,7 +45,7 @@ load_kernel:
   mov bx, KERNEL_SEGMENT
   mov es, bx
   mov bx, KERNEL_OFFSET
-  mov dh, 3
+  mov dh, KERNEL_SIZE
   mov dl, [BOOT_DRIVE]
   call disk_load
 

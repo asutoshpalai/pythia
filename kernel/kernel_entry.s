@@ -6,3 +6,18 @@
 call kernel_main
 
 jmp $
+
+global gdt_flush
+[ extern __gp ]
+
+gdt_flush:
+  lgdt [__gp]
+  mov ax, 0x10
+  mov ds, ax
+  mov es, ax
+  mov fs, ax
+  mov gs, ax
+  mov ss, ax
+  jmp 0x08:gdt_flush_fjmp
+gdt_flush_fjmp:
+  ret
