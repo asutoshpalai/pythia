@@ -14,6 +14,8 @@ extern "C" {
   size_t strlen(const char*);
 
   void puts(const char *data);
+  void itoa(int n, char* str, int index);
+  void reverse(char str[]);
 
 #ifdef __cplusplus
 

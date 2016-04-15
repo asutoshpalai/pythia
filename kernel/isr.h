@@ -5,7 +5,7 @@
 #include "system.h"
 #include "string.h"
 
-struct isr_fault_handler_regs {
+struct interrupt_handler_regs {
   unsigned int gs, fs, es, ds;      /* pushed the segs last */
   unsigned int edi, esi, ebp, esp, ebx, edx, ecx, eax;  /* pushed by 'pusha' */
   unsigned int int_no, err_code;    /* our 'push byte #' and ecodes do this */
@@ -50,6 +50,33 @@ extern void _isr31();
 
 void isrs_install();
 
-void fault_handler(struct isr_fault_handler_regs *r);
+void fault_handler(struct interrupt_handler_regs *r);
+
+extern void enable_interrupts();
+
+extern void disable_interrupts();
+
+extern void _irq0();
+extern void _irq1();
+extern void _irq2();
+extern void _irq3();
+extern void _irq4();
+extern void _irq5();
+extern void _irq6();
+extern void _irq7();
+extern void _irq8();
+extern void _irq9();
+extern void _irq10();
+extern void _irq11();
+extern void _irq12();
+extern void _irq13();
+extern void _irq14();
+extern void _irq15();
+
+void irq_install();
+
+void irq_install_handler(int irq, void (*handler) (struct interrupt_handler_regs *r));
+
+void irq_uninstall_handler(int irq);
 
 #endif

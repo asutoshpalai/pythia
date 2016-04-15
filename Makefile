@@ -7,6 +7,8 @@ KERNEL_OBJ_LIST:=\
 kernel/kernel_entry.o \
 kernel/isr.o \
 kernel/isrc.o \
+kernel/irqc.o \
+kernel/timer.o \
 kernel/kernel.o \
 kernel/system.o \
 kernel/string.o \

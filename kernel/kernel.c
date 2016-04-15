@@ -23,32 +23,23 @@ void kernel_main() {
   gdt_install();
   idt_install();
   isrs_install();
+  irq_install();
+  enable_interrupts();
   terminal_initialize();
+  timer_install();
 
   terminal_writestring("Hello, kernel World!\n");
   terminal_writestring("Here is some text in a new line\n");
   terminal_writestring("Here is some more text\n");
   terminal_writestring("Here is a new line\n");
   terminal_writestring("Here is some text after terminal scroll\n");
-  for (size_t i = 0; i < 25; i++) {
+  for (size_t i = 0; i < 5; i++) {
     terminal_writestring("This is line number ");
 
-    if (i == 7)
-      i = 9 / 0; // For testing interrupt handling
-
     char temp[10];
-    if (i < 10) {
-      temp[0] = i + '0';
-      temp[1] = 0;
-    }
-    else {
-      temp[0] = i/10 + '0';
-      temp[1] = i%10 + '0';
-      temp[2] = 0;
-    }
+    itoa(i, temp, 10);
     terminal_writestring(temp);
     terminal_writestring("\n");
   }
 
 }
-

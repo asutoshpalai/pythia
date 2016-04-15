@@ -3,6 +3,8 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#define TIMER_FREQUENCY 1000 // In hz
+
 unsigned char inportb (unsigned short _port);
 void outportb (unsigned short _port, unsigned char _data);
 
@@ -52,5 +54,7 @@ void idt_set_gate(struct idt_entry *idt, uint32_t base, uint16_t sel, uint8_t fl
 void idt_install();
 
 extern void idt_load();
+
+void timer_install();
 
 #endif

@@ -96,7 +96,7 @@ void isrs_install() {
  *  endless loop. All ISRs disable interrupts while they are being
  *  serviced as a 'locking' mechanism to prevent an IRQ from
  *  happening and messing up kernel data structures */
-void fault_handler(struct isr_fault_handler_regs *r) {
+void fault_handler(struct interrupt_handler_regs *r) {
   if(r->int_no < 32) {
     puts("\nException caught\nSystem halted\n");
     puts(exception_messages[r->int_no]);
