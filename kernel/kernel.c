@@ -41,5 +41,8 @@ void kernel_main() {
     terminal_writestring(temp);
     terminal_writestring("\n");
   }
+  puts("waiting for 2 sec\n");
+  timer_wait(2);
+  puts("waiting complete\n");
 
 }

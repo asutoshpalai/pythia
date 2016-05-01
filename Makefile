@@ -45,6 +45,12 @@ run: build/os-image
 
 rerun: clean run
 
+crun: build/os-image
+	(sleep $(filter-out $@,$(MAKECMDGOALS)); pkill qemu) & qemu-system-i386 -drive format=raw,file=$< -curses
+
+%:
+	@:
+
 clean:
 	find -type f \( -name "*.o" -o -name "*.bin" \) -delete
 	rm -rf build

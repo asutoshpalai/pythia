@@ -3,7 +3,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#define TIMER_FREQUENCY 1000 // In hz
+#define TIMER_FREQUENCY 100 // In hz
 
 unsigned char inportb (unsigned short _port);
 void outportb (unsigned short _port, unsigned char _data);
@@ -56,5 +56,7 @@ void idt_install();
 extern void idt_load();
 
 void timer_install();
+
+void timer_wait(unsigned int seconds);
 
 #endif
