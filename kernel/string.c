@@ -44,6 +44,10 @@ void puts(const char *data) {
   terminal_writestring(data);
 }
 
+void putchar(const char data) {
+  terminal_putchar(data);
+}
+
 /* itoa:  convert n to characters in s K&R implemantaion */
 void itoa(int n, char s[], int index) {
   int i, sign;

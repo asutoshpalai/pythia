@@ -4,6 +4,7 @@
 #include <stddef.h>
 #include <stdint.h>
 #include "vga/vga.h"
+#include "keyboard.h"
 #include "system.h"
 #include "string.h"
 #include "isr.h"
@@ -27,6 +28,7 @@ void kernel_main() {
   enable_interrupts();
   terminal_initialize();
   timer_install();
+  keyboard_install();
 
   terminal_writestring("Hello, kernel World!\n");
   terminal_writestring("Here is some text in a new line\n");

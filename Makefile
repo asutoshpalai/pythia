@@ -13,6 +13,7 @@ kernel/kernel.o \
 kernel/system.o \
 kernel/string.o \
 kernel/vga/vga.o \
+kernel/keyboard.o \
 
 
 all: build/os-image
