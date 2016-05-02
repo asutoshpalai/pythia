@@ -91,3 +91,31 @@ void printhex(int i) {
   itoa(i, temp, 16);
   puts(temp);
 }
+
+int strcmp(const char* str1, const char* str2) {
+  while(*str1 && *str1 == *str2) {
+    str1++;
+    str2++;
+  }
+
+  return *str1 - *str2;
+}
+
+char *strtok_next_ptr;
+
+char *strtok(char *str, char delim) {
+  if (str != NULL)
+    strtok_next_ptr = str;
+  else if(*strtok_next_ptr == '\0')
+    return NULL;
+
+  char *p_ptr = strtok_next_ptr;
+
+  while(*strtok_next_ptr != '\0' && *strtok_next_ptr != delim)
+    strtok_next_ptr++;
+
+  *strtok_next_ptr = '\0';
+  strtok_next_ptr++;
+
+  return p_ptr;
+}

@@ -13,6 +13,7 @@ kernel/kernel/kernel.o \
 kernel/kernel/system.o \
 kernel/utils/string.o \
 kernel/utils/stdio.o \
+kernel/utils/shell.o \
 kernel/drivers/vga/vga.o \
 kernel/drivers/keyboard/keyboard.o \
 

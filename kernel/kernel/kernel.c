@@ -9,6 +9,7 @@
 #include "string.h"
 #include "stdio.h"
 #include "isr.h"
+#include "shell.h"
 
 #if defined(__linux__)
 #error "You are not using cross-compiler, please switch"
@@ -30,6 +31,7 @@ void kernel_main() {
   terminal_initialize();
   timer_install();
   keyboard_install();
+  shell_init();
 
   terminal_writestring("Hello, kernel World!\n");
   terminal_writestring("Here is some text in a new line\n");
@@ -51,5 +53,8 @@ void kernel_main() {
   char buffer[200];
   gets(buffer);
   puts(buffer);
+  while(1) {
+    shell();
+  }
 
 }

@@ -20,6 +20,8 @@ extern "C" {
 
   void printi(int n);
   void printhex(int n);
+  int strcmp(const char *str1, const char *str2);
+  char* strtok(char *str1, char delim);
 
 #ifdef __cplusplus
 
