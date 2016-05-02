@@ -79,3 +79,15 @@ void reverse(char s[]) {
   }
 
 }
+
+void printi(int i) {
+  char temp[10];
+  itoa(i, temp, 10);
+  puts(temp);
+}
+
+void printhex(int i) {
+  char temp[10];
+  itoa(i, temp, 16);
+  puts(temp);
+}

@@ -18,6 +18,9 @@ extern "C" {
   void itoa(int n, char* str, int index);
   void reverse(char str[]);
 
+  void printi(int n);
+  void printhex(int n);
+
 #ifdef __cplusplus
 
 }

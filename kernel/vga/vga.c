@@ -5,6 +5,7 @@
 #include <stdint.h>
 #include "vga.h"
 #include "../system.h"
+#include "../string.h"
 
 uint8_t make_color(enum vga_color fg, enum vga_color bg) {
   return fg | bg << 4;
@@ -48,6 +49,7 @@ void terminal_scroll() {
       terminal_buffer[index - VGA_WIDTH] = terminal_buffer[index];
     }
   }
+  memset(&terminal_buffer[(VGA_HEIGHT - 1) * VGA_WIDTH], 0, sizeof(uint16_t) * VGA_WIDTH);
   terminal_row--;
 }
 
