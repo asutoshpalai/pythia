@@ -1,5 +1,5 @@
 #include "string.h"
-#include "vga/vga.h"
+#include "vga.h"
 
 void* memcpy(void* restrict dstptr, const void* restrict srcptr, size_t size) {
   unsigned char* dst = (unsigned char*) dstptr;

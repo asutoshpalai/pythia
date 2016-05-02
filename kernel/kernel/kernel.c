@@ -3,7 +3,7 @@
 #endif
 #include <stddef.h>
 #include <stdint.h>
-#include "vga/vga.h"
+#include "vga.h"
 #include "keyboard.h"
 #include "system.h"
 #include "string.h"

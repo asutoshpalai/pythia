@@ -1,20 +1,19 @@
 LD=i686-elf-ld
 CC=i686-elf-gcc
 
-CFLAGS=-Wall -Wextra -O2 -m32 -ffreestanding
+CFLAGS=-Wall -Wextra -O2 -m32 -ffreestanding -Ikernel/include
 
 KERNEL_OBJ_LIST:=\
-kernel/kernel_entry.o \
-kernel/isr.o \
-kernel/isrc.o \
-kernel/irqc.o \
-kernel/timer.o \
-kernel/kernel.o \
-kernel/system.o \
-kernel/string.o \
-kernel/vga/vga.o \
-kernel/keyboard.o \
-
+kernel/kernel/kernel_entry.o \
+kernel/kernel/isr.o \
+kernel/kernel/isrc.o \
+kernel/kernel/irqc.o \
+kernel/drivers/clock/timer.o \
+kernel/kernel/kernel.o \
+kernel/kernel/system.o \
+kernel/utils/string.o \
+kernel/drivers/vga/vga.o \
+kernel/drivers/keyboard/keyboard.o \
 
 all: build/os-image
 
