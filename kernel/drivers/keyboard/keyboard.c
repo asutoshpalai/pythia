@@ -1,5 +1,6 @@
 #include "keyboard.h"
 #include "isr.h"
+#include "system.h"
 
 #define ALT_KEY 0x38
 #define CTRL_KEY 0x1D
@@ -94,6 +95,10 @@ const char keyboard_map_shift[128] = {
 
 volatile uint16_t keyboard_status;
 
+volatile unsigned int keyboard_keycount;
+
+volatile char keyboard_last_printable_char;
+
 volatile uint8_t keyboard_prev_scancode;
 
 void keyboard_handler() {
@@ -144,10 +149,11 @@ void keyboard_handler() {
         mappedchar = keyboard_map_shift[scancode & 0x7F];
       }
       if (('a' <= mappedchar && mappedchar <= 'z')
-          && ((keyboard_status & CAPSLOCK_BIT) != 0 ^ ((keyboard_status & (RIGHT_SHIFT_BIT | LEFT_SHIFT_BIT))) != 0))
+          && (((keyboard_status & CAPSLOCK_BIT) != 0) ^ (((keyboard_status & (RIGHT_SHIFT_BIT | LEFT_SHIFT_BIT))) != 0)))
         mappedchar -= 'a' - 'A';
 
-      putchar(mappedchar);
+      keyboard_last_printable_char = mappedchar;
+      keyboard_keycount++;
     }
     else if (check_scode == ALT_KEY) {
       keyboard_status = keyboard_status | ALT_BIT;
@@ -172,6 +178,12 @@ void keyboard_handler() {
 void keyboard_install() {
   keyboard_status = 0;
   keyboard_prev_scancode = 0;
+  keyboard_keycount = 0;
   irq_install_handler(1, keyboard_handler);
 }
 
+char keyboard_getchar() {
+  unsigned int prev_keyc = keyboard_keycount;
+  while (prev_keyc == keyboard_keycount);
+  return keyboard_last_printable_char;
+}

@@ -2,8 +2,7 @@
 #define _ISR_H
 
 #include <stddef.h>
-#include "system.h"
-#include "string.h"
+#include <stdint.h>
 
 struct interrupt_handler_regs {
   unsigned int gs, fs, es, ds;      /* pushed the segs last */

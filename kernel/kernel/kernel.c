@@ -7,6 +7,7 @@
 #include "keyboard.h"
 #include "system.h"
 #include "string.h"
+#include "stdio.h"
 #include "isr.h"
 
 #if defined(__linux__)
@@ -46,5 +47,9 @@ void kernel_main() {
   puts("waiting for 2 sec\n");
   timer_wait(2);
   puts("waiting complete\n");
+
+  char buffer[200];
+  gets(buffer);
+  puts(buffer);
 
 }

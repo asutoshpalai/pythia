@@ -60,7 +60,7 @@ void terminal_putchar(char c) {
   }
   else if (c == '\t') {
     if (terminal_column < VGA_WIDTH - 9)
-      terminal_column = (terminal_column + 8) & (8 - 1);
+      terminal_column = (terminal_column + 8) & ~(8 - 1);
   }
   else if(c == '\b') {
     if(terminal_column == 0) {
