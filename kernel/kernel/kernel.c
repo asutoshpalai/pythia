@@ -6,6 +6,7 @@
 #include "vga.h"
 #include "keyboard.h"
 #include "system.h"
+#include "memory.h"
 #include "string.h"
 #include "stdio.h"
 #include "isr.h"
@@ -38,21 +39,24 @@ void kernel_main() {
   terminal_writestring("Here is some more text\n");
   terminal_writestring("Here is a new line\n");
   terminal_writestring("Here is some text after terminal scroll\n");
-  for (size_t i = 0; i < 5; i++) {
-    terminal_writestring("This is line number ");
+  char str[] = "A string";
+  char ch = 'c';
+  int integer = 45;
+  printf("This is a test for printf.\nThis is a char %c and this a string %s\n", ch, str);
+  printf("This is an int %d. This is the same in hex %x\n", integer, integer);
 
-    char temp[10];
-    itoa(i, temp, 10);
-    terminal_writestring(temp);
-    terminal_writestring("\n");
+  for (size_t i = 0; i < 5; i++) {
+    printf("This is line number %d\n", i);
   }
+  print_memory_map();
+
   puts("waiting for 2 sec\n");
   timer_wait(2);
   puts("waiting complete\n");
 
   char buffer[200];
   gets(buffer);
-  puts(buffer);
+  printf("%s\n", buffer);
   while(1) {
     shell();
   }

@@ -3,6 +3,8 @@
 [ extern kernel_main  ] ; Declate that we will be referencing the external symbol ’main ’,
 ; so the linker can substitute the final address
 
+mov [memory_map_address], ebx
+push ebx
 call kernel_main
 
 jmp $
@@ -28,3 +30,6 @@ global idt_load
 idt_load:
   lidt [idtp]
   ret
+
+global memory_map_address
+memory_map_address dw 0

@@ -8,14 +8,15 @@ kernel/kernel/kernel_entry.o \
 kernel/kernel/isr.o \
 kernel/kernel/isrc.o \
 kernel/kernel/irqc.o \
-kernel/drivers/clock/timer.o \
 kernel/kernel/kernel.o \
 kernel/kernel/system.o \
+kernel/kernel/memory.o \
 kernel/utils/string.o \
 kernel/utils/stdio.o \
 kernel/utils/shell.o \
 kernel/drivers/vga/vga.o \
 kernel/drivers/keyboard/keyboard.o \
+kernel/drivers/clock/timer.o \
 
 all: build/os-image
 
