@@ -19,14 +19,19 @@ kernel/drivers/keyboard/keyboard.o \
 
 all: build/os-image
 
-build/os-image: boot/boot_sector.bin kernel/kernel.bin
+build/os-image: boot/boot_sector.bin boot/boot_loader.bin kernel/kernel.bin
 	mkdir -p build
 	cat $^ > $@
 
-%boot_sector.bin: %boot_sector.s kernel/kernel.bin
+boot/boot_loader.bin: boot/boot_loader.s kernel/kernel.bin
 	$(eval KERNEL_SIZE=$(shell stat -c"%s" kernel/kernel.bin))
 	$(eval KERNEL_SECTORS=$(shell python -c "import math; print (math.ceil($(KERNEL_SIZE).0 / 512))"))
 	nasm $< -I"$(shell dirname $<)/" -f bin -dKERNEL_SIZE=$(KERNEL_SECTORS) -o $@
+
+boot/boot_sector.bin: boot/boot_sector.s boot/boot_loader.bin
+	$(eval BOOTLOADER_SIZE=$(shell stat -c"%s" boot/boot_loader.bin))
+	$(eval BOOTLOADER_SECTORS=$(shell python -c "import math; print (math.ceil($(BOOTLOADER_SIZE).0 / 512))"))
+	nasm $< -I"$(shell dirname $<)/" -f bin -dBOOT_LOADER_SIZE=$(BOOTLOADER_SECTORS) -o $@
 
 kernel/kernel.bin: $(KERNEL_OBJ_LIST)
 	$(LD) -o $@ -shared --oformat binary -ffreestanding -O2 -nostdlib -m elf_i386 -Ttext 0x10000 $^

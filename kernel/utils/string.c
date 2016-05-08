@@ -114,8 +114,10 @@ char *strtok(char *str, char delim) {
   while(*strtok_next_ptr != '\0' && *strtok_next_ptr != delim)
     strtok_next_ptr++;
 
-  *strtok_next_ptr = '\0';
-  strtok_next_ptr++;
+  if (*strtok_next_ptr != '\0') {
+    *strtok_next_ptr = '\0';
+    strtok_next_ptr++;
+  }
 
   return p_ptr;
 }
