@@ -1,0 +1,12 @@
+---
+layout: default
+---
+
+<div class="post">
+    <a class="post__back" href="/">&lt;-- home</a>
+    <h1 class="post__title">{{ page.title }}</h1>
+    <p class="post__date">{{ page.date | date: '%B %-d, %Y' }}</p>
+    <div class="post__content"?>
+        {{ content }}
+    </div>
+</div>

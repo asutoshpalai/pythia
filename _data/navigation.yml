@@ -1,0 +1,11 @@
+- title: home
+  url: /
+
+- title: about
+  url: /about
+
+- title: contact
+  url: mailto:asupalai@gmail.com
+
+- title: github
+  url: https://github.com/asutoshpalai/pythia
