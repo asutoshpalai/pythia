@@ -2,7 +2,6 @@
 layout: about
 ---
 
-# Pythia
 As you might have read from the description, it's an operating system. It is right from the boot sector code to the kernel, that means it practically has no dependencies (at least till now). It has a few drivers (clock, VGA, and keyboard) and very soon I am planning to add a memory manager.
 
 # Why?
