@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Pythia by asutoshpalai</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Pythia</h1>
+        <p>An experimental OS developed to learn about the internal concepts</p>
+
+        <p class="view"><a href="https://github.com/asutoshpalai/pythia">View the Project on GitHub <small>asutoshpalai/pythia</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/asutoshpalai/pythia/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/asutoshpalai/pythia/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/asutoshpalai/pythia">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h3>
+<a id="pythia" class="anchor" href="#pythia" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Pythia</h3>
+
+<p>As you might have read from the description, it's an operating system. It is right from the boot sector code to the kernel, that means it practically has no dependencies (at least till now). It has a few drivers (clock, VGA, and keyboard) and very soon I am planning to add a memory manager.</p>
+
+<h3>
+<a id="why" class="anchor" href="#why" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Why?</h3>
+
+<p>Well, I have written about the story of why this ever came into existence and why I decided to publish it (considering that every Computer Science student has to develop one) on <a href="http://blog.asutoshpalai.in/2016/05/my-journey-in-land-of-operating-systems.html">my blog</a>. As a short version, I would I like to say that I was just kinda attracted towards it and too a bit further than required by my course. Then I thought that someone else might want to relive the journey so I want to document my resources in developing this.</p>
+
+<p>My main aim of maintaining this repository is to document my work and the resources I used for them (I haven't written it yet, will be doing it soon).</p>
+
+<h3>
+<a id="a-bit-of-road-map" class="anchor" href="#a-bit-of-road-map" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>A bit of road-map</h3>
+
+<p>I don't plan on it much, but I just love to keep hacking on this when I have time and energy. My present plans for this is to first give it a user space. It still a bit far away considering I don't have a memory manager and process manager, but I didn't have high hopes for it right from the start. </p>
+
+<h3>
+<a id="features-it-currently-has" class="anchor" href="#features-it-currently-has" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Features it currently has</h3>
+
+<ol>
+<li>A boot loader (it's a two staged one)</li>
+<li>Kernel is in C and is in Protected Mode (obviously)</li>
+<li>The VGA driver has some basic functionalities like the terminal scroll and stuff.</li>
+<li>A bit organized folder structure and Makefile to make life easier</li>
+<li>GDT and ISR (+ IRQ) are setup up.</li>
+<li>A pretty basic but decent keyboard driver.</li>
+<li>A dummy shell so that we can give at least some command after startup.</li>
+</ol>
+
+<h3>
+<a id="disclaimer" class="anchor" href="#disclaimer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Disclaimer</h3>
+
+<p>I am not an OS expert, I am still exploring such low-level stuff myself. I developed this as an intersecting engagement and plan to continue on it. I just follow available guides, learn stuff and then try to code it. </p>
+
+<h3>
+<a id="contribute-or-contact" class="anchor" href="#contribute-or-contact" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contribute or Contact</h3>
+
+<p>I would love to see contributions on it and they are very welcome.
+If you want to reach me drop me a mail at <a href="mailto:asupalai@gmail.com">asupalai@gmail.com</a>, I would be happy to hear from you.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/asutoshpalai">asutoshpalai</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
