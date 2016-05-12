@@ -3,6 +3,9 @@ name: Pythia
 description: An experimental OS developed to learn about the internal concepts.
 google_verification: null
 
+# GH Configs
+baseurl: /pythia
+
 
 # File management
 include: [".htaccess"]

@@ -1,8 +1,10 @@
 - title: home
   url: /
+  relative: true
 
 - title: about
   url: /about
+  realive: true
 
 - title: contact
   url: mailto:asupalai@gmail.com
