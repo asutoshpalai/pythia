@@ -5,10 +5,10 @@ layout: about
 As you might have read from the description, it's an operating system. It is right from the boot sector code to the kernel, that means it practically has no dependencies (at least till now). It has a few drivers (clock, VGA, and keyboard) and very soon I am planning to add a memory manager.
 
 # Why?
-Well, I have written about the story of why this ever came into existence and why I decided to publish it (considering that every Computer Science student has to develop one) on [my blog](http://blog.asutoshpalai.in/2016/05/my-journey-in-land-of-operating-systems.html). As a short version, I would I like to say that I was just kinda attracted towards it and too a bit further than required by my course. Then I thought that someone else might want to relive the journey so I want to document my resources in developing this.
+Well, I have written about the story of why this ever came into existence and why I decided to publish it (considering that every Computer Science student has to develop one) on [my blog](http://blog.asutoshpalai.in/2016/05/my-journey-in-land-of-operating-systems.html). As a short version, I would I like to say that I was just kinda attracted towards OS development and took a bit further than required by my course. Then I thought that someone else might want to relive the journey so I want to document my resources in developing this.
 
 # A bit of road-map
-I don't plan on it much, but I just love to keep hacking on this when I have time and energy. My present plans for this is to first give it a user space. It still a bit far away considering I don't have a memory manager and process manager, but I didn't have high hopes for it right from the start. 
+I don't have much plans for it, but I just love to keep hacking on this when I have time and energy. My present plans for this is to first give it a user space. It still a bit far away considering I don't have a memory manager and process manager, but I didn't have high hopes for it right from the start. 
 
 # Features it currently has
 1. A boot loader (it's a two staged one)
@@ -22,6 +22,9 @@ I don't plan on it much, but I just love to keep hacking on this when I have tim
 # Disclaimer
 I am not an OS expert, I am still exploring such low-level stuff myself. I developed this as an intersecting engagement and plan to continue on it. I just follow available guides, learn stuff and then try to code it. 
 
+# Licenses
+This project in under [GLPv3 License](https://github.com/asutoshpalai/pythia/blob/master/LICENSE). So, feel free to use this for your own purpose.
+
 # Contribute or Contact
-I would love to see contributions on it and they are very welcome.
+Any kind of contribution is welcome and I would love to see some.
 If you want to reach me, drop me a mail at [asupalai@gmail.com](mailto:asupalai@gmail.com). I would be happy to hear from you.
