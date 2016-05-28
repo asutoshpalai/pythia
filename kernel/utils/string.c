@@ -80,6 +80,28 @@ void reverse(char s[]) {
 
 }
 
+int atoi(char *s, int index) {
+  int ret = 0;
+  int sign = 1;
+  if(*s == '-') {
+    sign = -1;
+    s++;
+
+  }
+
+  while(*s) {
+    int r = *(s++);
+    r -= '0';
+
+    if (r > 9)
+      r -= 7;
+
+    ret = (ret * index) + r;
+  }
+
+  return sign * ret;
+}
+
 void printi(int i) {
   char temp[10];
   itoa(i, temp, 10);

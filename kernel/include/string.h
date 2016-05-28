@@ -16,6 +16,7 @@ extern "C" {
   void puts(const char *data);
   void putchar(const char data);
   void itoa(int n, char* str, int index);
+  int atoi(char* str, int index);
   void reverse(char str[]);
 
   void printi(int n);

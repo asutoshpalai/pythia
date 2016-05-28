@@ -24,19 +24,28 @@ void memory_command() {
 
   if(command == NULL || strcmp(command, "help") == 0) {
     printf("Usage:\nprint_pool: Print the memory pool linked list\n");
-    printf("malloc: Execute malloc and print the address returned\n");
-    printf("free: Call free() with the last malloc address\n");
+    printf("malloc [?size - in hex]: Execute malloc and print the address returned\n");
+    printf("free [?addr - in hex]: Call free() with the last malloc address\n");
   }
   else if(strcmp(command, "print_pool") == 0) {
     print_memory_pool_list();
   }
   else if(strcmp(command, "malloc") == 0) {
-    void * new = malloc(16);
+    char *s = strtok(NULL, ' ');
+    void * new;
+    if (s == NULL)
+      new = malloc(16);
+    else
+      new = malloc(atoi(s, 16));
     maddr = new;
     printf("Got memory address 0x%x\n", (int)new);
   }
   else if(strcmp(command, "free") == 0) {
-    free(maddr);
+    char *s = strtok(NULL, ' ');
+    if (s == NULL)
+      free(maddr);
+    else
+      free(atoi(s, 16));
   }
 }
 
