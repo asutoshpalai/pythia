@@ -9,6 +9,7 @@ kernel/kernel/isr.o \
 kernel/kernel/isrc.o \
 kernel/kernel/irqc.o \
 kernel/kernel/kernel.o \
+kernel/kernel/stdlib.o \
 kernel/kernel/system.o \
 kernel/kernel/memory.o \
 kernel/utils/string.o \

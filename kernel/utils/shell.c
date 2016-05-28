@@ -1,6 +1,7 @@
 #include "shell.h"
 #include "stdio.h"
 #include "string.h"
+#include "memory.h"
 
 struct shell_command shell_commands[MAX_COMMANDS];
 
@@ -14,6 +15,28 @@ void help_command() {
     puts("\t\t");
     puts(shell_commands[i].description);
     puts("\n");
+  }
+}
+
+void *maddr;
+void memory_command() {
+  char *command = strtok(NULL, ' ');
+
+  if(command == NULL || strcmp(command, "help") == 0) {
+    printf("Usage:\nprint_pool: Print the memory pool linked list\n");
+    printf("malloc: Execute malloc and print the address returned\n");
+    printf("free: Call free() with the last malloc address\n");
+  }
+  else if(strcmp(command, "print_pool") == 0) {
+    print_memory_pool_list();
+  }
+  else if(strcmp(command, "malloc") == 0) {
+    void * new = malloc(16);
+    maddr = new;
+    printf("Got memory address 0x%x\n", (int)new);
+  }
+  else if(strcmp(command, "free") == 0) {
+    free(maddr);
   }
 }
 
@@ -66,6 +89,7 @@ void shell_init() {
 
   install_command("help", "List the commands available", help_command);
   install_command("echo", "print the tokens prvided\nUsage: echo <string>", echo_command);
+  install_command("memory", "Commands related to memory\nUsage: memory <command>", memory_command);
   install_command("", "Dummy command for empty queries", empty_command);
   shell_prompt = "Shell> ";
 }

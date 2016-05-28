@@ -48,7 +48,9 @@ void kernel_main() {
   for (size_t i = 0; i < 5; i++) {
     printf("This is line number %d\n", i);
   }
+
   print_memory_map();
+  init_memory_allocator();
 
   puts("waiting for 2 sec\n");
   timer_wait(2);
