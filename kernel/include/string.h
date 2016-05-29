@@ -12,6 +12,7 @@ extern "C" {
   void* memset(void*, int, size_t);
   void* memsetw(void* bufptr, int value, size_t size);
   size_t strlen(const char*);
+  char* strcpy(char*, const char*);
 
   void puts(const char *data);
   void putchar(const char data);

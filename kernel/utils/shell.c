@@ -62,6 +62,29 @@ void echo_command() {
   puts("\n");
 }
 
+void set_command() {
+  char *var, *sign, *value;
+  var = strtok(NULL, ' ');
+  sign = strtok(NULL, ' ');
+  value = strtok(NULL, ' ');
+  if(var == NULL) {
+    printf("No arguments given\n");
+    return;
+  }
+  if(sign == NULL || sign[0] != '=') {
+    printf("Assignment sign error\n");
+    return;
+  }
+  if(value == NULL) {
+    printf("You forgot to provide the value\n");
+    return;
+  }
+
+  if(strcmp(var, "prompt") == 0) {
+    set_shell_prompt(value);
+  }
+}
+
 void install_command(char* command, char* desc, void (*function)()) {
   shell_commands[shell_active_commands].command = command;
   shell_commands[shell_active_commands].description = desc;
@@ -82,9 +105,7 @@ void shell_execute_command(char *full_command) {
   int choice = shell_find_command(command);
 
   if (choice == -1) {
-    puts("Invalid command ");
-    puts(command);
-    puts("\n");
+    printf("Invalid command %s\nEnter help to list the available commands\n", command);
     return;
   }
 
@@ -97,18 +118,24 @@ void shell_init() {
   shell_active_commands = 0;
 
   install_command("help", "List the commands available", help_command);
+  install_command("set", "Set a variable\nUsage: set <var> = <val>", set_command);
   install_command("echo", "print the tokens prvided\nUsage: echo <string>", echo_command);
   install_command("memory", "Commands related to memory\nUsage: memory <command>", memory_command);
   install_command("", "Dummy command for empty queries", empty_command);
-  shell_prompt = "Shell> ";
+  shell_prompt = NULL;
+  set_shell_prompt("Shell>");
 }
 
 void set_shell_prompt(char* p) {
-  shell_prompt = p;
+  char *new_p = (char *)malloc(strlen(p) + 1);
+  strcpy(new_p, p);
+  if (shell_prompt)
+    free(shell_prompt);
+  shell_prompt = new_p;
 }
 
 void shell() {
-  puts(shell_prompt);
+  printf("%s ", shell_prompt);
   char command[200];
   gets(command);
 

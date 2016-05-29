@@ -40,6 +40,12 @@ size_t strlen(const char* data) {
   return result;
 }
 
+char* strcpy(char *dest, const char* source) {
+  while(*source)
+    *(dest++) = *(source++);
+  *dest = NULL;
+}
+
 void puts(const char *data) {
   terminal_writestring(data);
 }
