@@ -43,7 +43,9 @@ size_t strlen(const char* data) {
 char* strcpy(char *dest, const char* source) {
   while(*source)
     *(dest++) = *(source++);
-  *dest = NULL;
+  *dest = '\0';
+
+  return dest;
 }
 
 void puts(const char *data) {

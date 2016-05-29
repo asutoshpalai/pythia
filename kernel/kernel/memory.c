@@ -2,9 +2,45 @@
 #include <stdbool.h>
 #endif
 #include "memory.h"
+#include "memory/paging.h"
 #include "stdlib.h"
 #include "stdio.h"
 
+uint32_t *page_directory;
+void memory_manager_init() {
+  kalloc_pframe_init();
+
+  page_directory = (uint32_t *)kalloc_pframe();
+
+  int i;
+  for(i = 0; i < 1024; i++) {
+    page_directory[i] = 0x00000002;
+  }
+
+  uint32_t *first_page_table = (uint32_t *)kalloc_pframe();
+  // Map the first 4 MB onto itself
+  for(i = 0; i < 1024; i++) {
+    first_page_table[i] = (i * 4096) | 3;
+  }
+
+  page_directory[0] = ((uint32_t)first_page_table) | 3;
+
+  load_pd(page_directory);
+  enable_paging();
+}
+
+void show_page_entry(int pde, int pte) {
+  disable_paging();
+  uint32_t pt_address = page_directory[pte] & ~((1 << 12) - 1);
+  printf("Page table address 0x%x\n", pt_address);
+  uint32_t entry = ((uint32_t *)(page_directory[pte] & ~((1 << 12) - 1)))[pte];
+  uint32_t e_h = entry >> 16;
+  uint32_t e_l = entry & 0xFFFF;
+  printf("Page table entry at %d of PT %d is 0x%x %x\n", pte, pde, e_h, e_l);
+  enable_paging();
+}
+
+/*
 struct memory_block_header {
   struct memory_block_header* prev_header;
   struct memory_block_header* next_header;
@@ -33,29 +69,7 @@ void print_memory_map() {
   }
 }
 
-/* Checks if the memory 0x100000 and above is available.
- * It returns the index of that memory segment in mmap*/
-int find_memory() {
-  bool found = false;
-  int i;
-
-  struct ACPI_m_map* mmap = memory_map_address->mmap;
-  for(i = 0; i < memory_map_address->count; i++)
-    if(mmap[i].base_addr <= MEMORY_FIRST_MEM_ADDR &&
-        mmap[i].base_addr + mmap[i].length > MEMORY_FIRST_MEM_ADDR) {
-      found = true;
-      break;
-    }
-
-  if(!found) {
-    printf("Memory address 0x100000 is not available\n");
-    abort();
-  }
-
-  return i;
-}
-
-void init_memory_allocator() {
+void init_malloc() {
   int index = find_memory();
 
   struct ACPI_m_map mmap = memory_map_address->mmap[index];
@@ -190,3 +204,4 @@ void print_memory_pool_list() {
     ptr = ptr->next_header;
   }
 }
+*/

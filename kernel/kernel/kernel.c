@@ -28,8 +28,9 @@ void kernel_main() {
   idt_install();
   isrs_install();
   irq_install();
-  enable_interrupts();
   terminal_initialize();
+  memory_manager_init();
+  enable_interrupts();
   timer_install();
   keyboard_install();
   shell_init();
@@ -48,9 +49,6 @@ void kernel_main() {
   for (size_t i = 0; i < 5; i++) {
     printf("This is line number %d\n", i);
   }
-
-  print_memory_map();
-  init_memory_allocator();
 
   puts("waiting for 2 sec\n");
   timer_wait(2);

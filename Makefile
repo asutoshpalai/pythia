@@ -9,6 +9,8 @@ kernel/kernel/isr.o \
 kernel/kernel/isrc.o \
 kernel/kernel/irqc.o \
 kernel/kernel/kernel.o \
+kernel/kernel/memory/page_allocator.o \
+kernel/kernel/memory/paging_s.o \
 kernel/kernel/stdlib.o \
 kernel/kernel/system.o \
 kernel/kernel/memory.o \

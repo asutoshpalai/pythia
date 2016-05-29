@@ -5,7 +5,7 @@
 #include <stdint.h>
 
 #define MEMORY_FIRST_MEM_ADDR 0x100000
-#define MEMORY_MAX_MEMORY 16*1024*1024 // 16MB expected memory to allocate
+#define MEMORY_MAX_MEMORY (32*1024*1024) // 32MB - expected memory to allocate
 
 struct ACPI_m_map {
   uint32_t base_addr;
@@ -23,8 +23,10 @@ struct boot_loader_mmap {
 
 extern struct boot_loader_mmap *memory_map_address;
 
-void print_memory_map();
-void init_memory_allocator();
-void print_memory_pool_list();
+void memory_manager_init();
+void show_page_entry(int pde, int pte);
+//void print_memory_map();
+//void init_malloc();
+//void print_memory_pool_list();
 
 #endif

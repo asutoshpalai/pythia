@@ -18,6 +18,24 @@ void help_command() {
   }
 }
 
+void paging_command() {
+  char *command = strtok(NULL, ' ');
+
+  if(command == NULL || strcmp(command, "help") == 0) {
+    printf("Usage:\nentry: Print the page_table entry: \tentry <pde> <pte>\n");
+  }
+  else if(strcmp(command, "entry") == 0) {
+    char *s = strtok(NULL, ' ');
+    int pde = atoi(s, 16);
+
+    s = strtok(NULL, ' ');
+    int pte = atoi(s, 16);
+
+    show_page_entry(pde, pte);
+  }
+}
+
+/*
 void *maddr;
 void memory_command() {
   char *command = strtok(NULL, ' ');
@@ -48,6 +66,7 @@ void memory_command() {
       free(atoi(s, 16));
   }
 }
+*/
 
 void empty_command() {
 
@@ -120,18 +139,15 @@ void shell_init() {
   install_command("help", "List the commands available", help_command);
   install_command("set", "Set a variable\nUsage: set <var> = <val>", set_command);
   install_command("echo", "print the tokens prvided\nUsage: echo <string>", echo_command);
-  install_command("memory", "Commands related to memory\nUsage: memory <command>", memory_command);
+  /*install_command("memory", "Commands related to memory\nUsage: memory <command>", memory_command);*/
+  install_command("paging", "Commands related to paging", paging_command);
   install_command("", "Dummy command for empty queries", empty_command);
   shell_prompt = NULL;
   set_shell_prompt("Shell>");
 }
 
 void set_shell_prompt(char* p) {
-  char *new_p = (char *)malloc(strlen(p) + 1);
-  strcpy(new_p, p);
-  if (shell_prompt)
-    free(shell_prompt);
-  shell_prompt = new_p;
+  shell_prompt = p;
 }
 
 void shell() {
