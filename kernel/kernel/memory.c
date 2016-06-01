@@ -6,6 +6,9 @@
 #include "stdlib.h"
 #include "stdio.h"
 
+#define PAGED_PD ((uint32_t *)0xFFFFF000)
+#define PAGED_PT(PTN) (((uint32_t *)0xFFC00000) + (PTN * 1024))
+
 uint32_t *page_directory;
 void memory_manager_init() {
   kalloc_pframe_init();
@@ -25,19 +28,32 @@ void memory_manager_init() {
 
   page_directory[0] = ((uint32_t)first_page_table) | 3;
 
+  // Map page directory to itself. A super brilliant technique to handle the
+  // page directory after enable paging. Page directory becomes a page table
+  // mapping the last virtual address space 0xFFC00000 - 0XFFFFFFFF.
+  // PD is availabe at 0xFFFFF000
+  // Each entry in page directory (i.e. page tables) become pages that can be
+  // accessed.
+  // The page tables occupy pages from 0xFFC00000 on wards.
+  page_directory[1023] = ((uint32_t)page_directory) | 3;
+
   load_pd(page_directory);
   enable_paging();
 }
 
 void show_page_entry(int pde, int pte) {
-  disable_paging();
-  uint32_t pt_address = page_directory[pte] & ~((1 << 12) - 1);
-  printf("Page table address 0x%x\n", pt_address);
-  uint32_t entry = ((uint32_t *)(page_directory[pte] & ~((1 << 12) - 1)))[pte];
+  uint32_t pd_entry = PAGED_PD[pde];
+  if((pd_entry & 1) == 0) {
+    printf("Page directory entry is %x\n", pd_entry);
+    printf("Page table not loaded in the memory\n");
+    return;
+  }
+
+  printf("Page table physical address 0x%x\n", pd_entry & 0xFFFFF000);
+  uint32_t entry = PAGED_PT(pde)[pte];
   uint32_t e_h = entry >> 16;
   uint32_t e_l = entry & 0xFFFF;
   printf("Page table entry at %d of PT %d is 0x%x %x\n", pte, pde, e_h, e_l);
-  enable_paging();
 }
 
 /*

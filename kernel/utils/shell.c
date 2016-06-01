@@ -22,7 +22,8 @@ void paging_command() {
   char *command = strtok(NULL, ' ');
 
   if(command == NULL || strcmp(command, "help") == 0) {
-    printf("Usage:\nentry: Print the page_table entry: \tentry <pde> <pte>\n");
+    printf("Usage:\nentry: Print the page_table entry: \tentry <pde> <pte>\n" \
+        "Numbers are in hex\n");
   }
   else if(strcmp(command, "entry") == 0) {
     char *s = strtok(NULL, ' ');
