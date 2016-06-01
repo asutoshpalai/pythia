@@ -1,7 +1,7 @@
 LD=i686-elf-ld
 CC=i686-elf-gcc
 
-CFLAGS=-Wall -Wextra -O2 -m32 -ffreestanding -Ikernel/include
+CFLAGS=-Wall -Wextra -O2 -m32 -ffreestanding -Ios/include
 
 KERNEL_OBJ_LIST:=\
 os/kernel/kernel_entry.o \
@@ -14,9 +14,10 @@ os/kernel/memory/paging_s.o \
 os/kernel/stdlib.o \
 os/kernel/system.o \
 os/kernel/memory.o \
+os/utils/shell.o \
 os/utils/string.o \
 os/utils/stdio.o \
-os/utils/shell.o \
+os/utils/stdlib.o \
 os/drivers/vga/vga.o \
 os/drivers/keyboard/keyboard.o \
 os/drivers/clock/timer.o \

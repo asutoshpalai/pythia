@@ -1,6 +1,7 @@
 #include "shell.h"
 #include "stdio.h"
 #include "string.h"
+#include "stdlib.h"
 #include "memory.h"
 
 struct shell_command shell_commands[MAX_COMMANDS];
@@ -36,7 +37,6 @@ void paging_command() {
   }
 }
 
-/*
 void *maddr;
 void memory_command() {
   char *command = strtok(NULL, ' ');
@@ -64,10 +64,9 @@ void memory_command() {
     if (s == NULL)
       free(maddr);
     else
-      free(atoi(s, 16));
+      free((void *)atoi(s, 16));
   }
 }
-*/
 
 void empty_command() {
 
@@ -140,7 +139,7 @@ void shell_init() {
   install_command("help", "List the commands available", help_command);
   install_command("set", "Set a variable\nUsage: set <var> = <val>", set_command);
   install_command("echo", "print the tokens prvided\nUsage: echo <string>", echo_command);
-  /*install_command("memory", "Commands related to memory\nUsage: memory <command>", memory_command);*/
+  install_command("memory", "Commands related to memory\nUsage: memory <command>", memory_command);
   install_command("paging", "Commands related to paging", paging_command);
   install_command("", "Dummy command for empty queries", empty_command);
   shell_prompt = NULL;
@@ -148,7 +147,11 @@ void shell_init() {
 }
 
 void set_shell_prompt(char* p) {
-  shell_prompt = p;
+  char *new_p = (char *)malloc(strlen(p) + 1);
+  strcpy(new_p, p);
+  if (shell_prompt)
+    free(shell_prompt);
+  shell_prompt = new_p;
 }
 
 void shell() {
